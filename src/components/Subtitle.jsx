@@ -9,8 +9,8 @@ const Subtitle = ({ subtitles, currentTime }) => {
   }, [currentTime, subtitles]);
 
   return (
-    <div>
-      {currentSubtitle && <p style={{padding:'10px'}}>{currentSubtitle.text}</p>}
+    <div className="subtitle-container">
+      {currentSubtitle && <p style={{padding:'10px'}} className="subtitle-text">{currentSubtitle.text}</p>}
     </div>
   );
 };

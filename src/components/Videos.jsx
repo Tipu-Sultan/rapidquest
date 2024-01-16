@@ -14,6 +14,7 @@ import Subtitle from './Subtitle';
 import SubtitleForm from './SubtitleForm';
 import VideoList from './VideoList';
 import SubtitleModal from './SubtitleModal';
+import './video.css';
 
 const Video = ({ videos, loading, enableAndDisableForm, editSubText, isAddSubtitles }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,18 +71,27 @@ const Video = ({ videos, loading, enableAndDisableForm, editSubText, isAddSubtit
     navigate(`/videos/${newVideoId}`);
   };
 
+  const handleShare = () => {
+    navigator.clipboard.writeText(`https://storage.cloud.google.com/edunify/${encodeURIComponent(selectedVideo.filename)}`)
+    .then(() => {
+      alert('Link copied to clipboard!');
+    }).catch((err) => {
+      console.error('Unable to copy to clipboard', err);
+    });
+  }
+
 
   if (loading) {
     return <Spinner size="xl" />;
   }
 
-
+ 
   return (
     <Layout>
       <Container maxW={'container.xl'} py={6}>
         <Grid templateColumns={['1fr', '1fr', '3fr 1fr']} gap={6}>
           <Box mb={8} w="100%">
-            <Box h={['300px', '400px', '600px']} bg={bgColor} position="relative">
+            <Box position="relative">
               {selectedVideo && (
                 <>
                   <video
@@ -93,15 +103,19 @@ const Video = ({ videos, loading, enableAndDisableForm, editSubText, isAddSubtit
                     height="100%"
                     borderRadius="md"
                     style={{ borderRadius: "5px" }}
+                    muted
+                    preload="auto"
+                    className="custom-video-player"
                   />
-                  <Subtitle subtitles={selectedVideo?.subtitles} currentTime={currentTime} bg={bgColor} />
+                  <Subtitle subtitles={selectedVideo?.subtitles} currentTime={currentTime}  />
                   {isModalOpen && <SubtitleModal msg={msg} setSelectedVideo={setSelectedVideo} onSubtitleSubmit={handleSubtitleSubmit} videoId={videoId} subtitles={selectedVideo?.subtitles} isModalOpen={isModalOpen} handleCloseModal={handleCloseModal} />}
                 </>
               )}
             </Box>
-            <Box mt={4}>
-              <Button mr={3} onClick={() => enableAndDisableForm()}>{editSubText}</Button>
-              <Button onClick={handleOpenModal}>Edit Subtitles</Button>
+            <Box mt={4} >
+              <Button mr={3} variant={'outline'} color={'green.400'} onClick={() => enableAndDisableForm()}>{editSubText}</Button>
+              <Button mr={3} variant={'outline'} color={'yellow.400'} onClick={handleOpenModal}>Edit Subtitles</Button>
+              <Button variant={'outline'} color={'blue.400'} onClick={handleShare}>Share</Button>
               {isAddSubtitles && !isModalOpen && <SubtitleForm msg={msg} videoId={selectedVideo?._id} onSubtitleSubmit={handleSubtitleSubmit} />}
             </Box>
           </Box>

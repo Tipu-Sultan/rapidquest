@@ -46,7 +46,7 @@ function App() {
           <Route path='/upload' element={<Upload setVideos={setVideos}/>} />
           <Route path='/videos' element={<VideoGrid enableAndDisableForm={enableAndDisableForm} videos={videos} />} loading={loading} />
           <Route path='/videos/:videoId' element={<Videos isAddSubtitles={isAddSubtitles} editSubText={editSubText} enableAndDisableForm={enableAndDisableForm} videos={videos} />} />
-          <Route path='/documentation' element={<Documentation videos={videos} />} />
+          <Route path='/documentation' element={<Documentation />} />
         </Routes>
       </Router>
     </div>
