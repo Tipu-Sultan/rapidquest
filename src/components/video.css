@@ -1,7 +1,6 @@
-/* VideoPlayer.css */
 
 .video-player-container {
-    position: relative; /* Make sure the container has a relative position */
+    position: relative;
   }
   
   .subtitle-container {
