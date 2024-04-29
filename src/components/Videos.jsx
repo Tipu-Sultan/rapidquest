@@ -72,7 +72,7 @@ const Video = ({ videos, loading, enableAndDisableForm, editSubText, isAddSubtit
   };
 
   const handleShare = () => {
-    navigator.clipboard.writeText(`https://storage.cloud.google.com/edunify/${encodeURIComponent(selectedVideo.filename)}`)
+    navigator.clipboard.writeText(selectedVideo.public_url)
     .then(() => {
       alert('Link copied to clipboard!');
     }).catch((err) => {
@@ -96,7 +96,7 @@ const Video = ({ videos, loading, enableAndDisableForm, editSubText, isAddSubtit
                 <>
                   <video
                     ref={videoRef}
-                    src={`https://storage.cloud.google.com/edunify/${encodeURIComponent(selectedVideo.filename)}`}
+                    src={selectedVideo.public_url}
                     controls
                     onTimeUpdate={handleTimeUpdate}
                     width="100%"
