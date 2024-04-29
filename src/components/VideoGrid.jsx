@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { SimpleGrid, Heading, Button, Image, VStack, Box } from '@chakra-ui/react';
+import { SimpleGrid, Heading, Button, Image, VStack, Box, Text } from '@chakra-ui/react';
 import Layout from '../layout/Layout';
 
 const VideoGrid = ({ videos,enableAndDisableForm }) => {
@@ -12,6 +12,7 @@ const VideoGrid = ({ videos,enableAndDisableForm }) => {
                         <VStack align="stretch" p={4}>
                             <Heading size="sm" mb={2}>
                                 {video.title}
+                                <Text>{video.description}</Text>
                             </Heading>
                             <Link to={`/videos/${video._id}`}>
                                 <Button colorScheme="teal" size="sm" w="100%">
